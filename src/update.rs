@@ -1,7 +1,9 @@
 // Daniel Yu
+// 4/15/23
 
 use crate::SIZE;
 
+// Checks if two board states are equal
 pub fn and_arrs(arr1 : &[[u8; SIZE]; SIZE], arr2 : &[[u8; SIZE]; SIZE]) -> bool
 {
 	for y in 0..SIZE
@@ -21,6 +23,7 @@ pub fn and_arrs(arr1 : &[[u8; SIZE]; SIZE], arr2 : &[[u8; SIZE]; SIZE]) -> bool
 	true
 }
 
+// returns number of neighbors at a given position on the board
 fn neighbors(x : usize, y : usize, arr : &[[u8; SIZE]; SIZE]) -> u8
 {
 	
@@ -55,6 +58,7 @@ fn neighbors(x : usize, y : usize, arr : &[[u8; SIZE]; SIZE]) -> u8
 	count
 }
 
+// updates current board state
 pub fn step(arr : &mut [[u8; SIZE]; SIZE], origin : &[[u8; SIZE]; SIZE]) -> ()
 {
 	for y in 0..SIZE
