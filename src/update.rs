@@ -3,30 +3,9 @@
 
 use crate::SIZE;
 
-// Checks if two board states are equal
-pub fn and_arrs(arr1 : &[[u8; SIZE]; SIZE], arr2 : &[[u8; SIZE]; SIZE]) -> bool
-{
-	for y in 0..SIZE
-	{
-		for x in 0..SIZE
-		{
-			if arr1[y][x] != arr2[y][x]
-			{
-				return false;
-			}
-			if (x == (SIZE-1)) && (y == (SIZE-1))
-			{
-				return true;
-			}
-		}
-	}
-	true
-}
-
 // returns number of neighbors at a given position on the board
 fn neighbors(x : usize, y : usize, arr : &[[u8; SIZE]; SIZE]) -> u8
 {
-	
 	let left_x : usize;
 	let right_x : usize;
 	let top_y : usize;
