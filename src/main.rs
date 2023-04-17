@@ -22,7 +22,7 @@ fn updatearr(arr : &mut[[u8; SIZE]; SIZE]) -> Option<()>
     update::step(arr, &last);
     // ends program if the board is empty or "stablized"
     // currently unable to detect repeating stable patterns!
-    if update::and_arrs(arr, &last) == true { return None; }
+    if *arr == last { return None; }
     Some(())
 }
 
