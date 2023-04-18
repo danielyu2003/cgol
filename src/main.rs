@@ -9,26 +9,22 @@ mod update;
 // Defines board size
 pub const SIZE : usize = 20;
 
-fn printarr(arr : &[[u8; SIZE]; SIZE], reset : bool) -> ()
+fn render(arr : &[[u8; SIZE]; SIZE], reset : bool) -> ()
 {
     for row in arr { println!("{:?}", row); }
-    // Escape sequence to overwrite board
     if reset { print!("\x1b[{}A", SIZE); }
 }
 
 fn updatearr(arr : &mut[[u8; SIZE]; SIZE]) -> Option<()>
 {
-    let last = arr.clone();
-    update::step(arr, &last);
-    // ends program if the board is empty or "stablized"
-    // currently unable to detect repeating stable patterns!
-    if *arr == last { return None; }
+    let prev = arr.clone();
+    update::step(arr, &prev);
+    if *arr == prev { return None; }
     Some(())
 }
 
-fn initstate(state : &mut[[u8; SIZE]; SIZE]) -> ()
+fn init(state : &mut[[u8; SIZE]; SIZE]) -> ()
 {
-    // glider configuration
     state[10][8] = 1;
     state[10][9] = 1;
     state[10][10] = 1;
@@ -40,17 +36,17 @@ fn main() -> ()
 {
     let mut state = [[0u8; SIZE]; SIZE];
 
-    initstate(&mut state);
+    init(&mut state);
 
-    printarr(&state, true);
+    render(&state, true);
     loop 
     {
         sleep(time::Duration::from_secs(1));
         if updatearr(&mut state) == None 
         {
-            printarr(&state, false);
+            render(&state, false);
             return ();
         }
-        printarr(&state, true);
+        render(&state, true);
     }
 }
